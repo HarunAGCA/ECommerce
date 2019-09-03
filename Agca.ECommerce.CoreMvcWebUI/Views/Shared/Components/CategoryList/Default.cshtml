@@ -1,0 +1,16 @@
+﻿@model Agca.ECommerce.CoreMvcWebUI.Models.CategoryListViewModel
+
+    <div class="list-group">
+        <div class="list-group-item disabled bg-warning text-light">Categories</div>
+        <a href="/Product/List" class="list-group-item">All Products</a>
+        @foreach (var category in Model.Categories)
+        {
+            string cssClass = "list-group-item";
+            if (Model.CurrentCategoryId == category.Id)
+            {
+                cssClass += " active";
+            }
+            <a href="/Product/List?categoryId=@category.Id" class="@cssClass">@category.Name</a>
+        }
+    </div>
+

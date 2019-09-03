@@ -1,0 +1,14 @@
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\bin\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.deps.json
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\bin\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.dll
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\bin\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.pdb
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\obj\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.csprojAssemblyReference.cache
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\obj\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.csproj.CoreCompileInputs.cache
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\obj\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.AssemblyInfoInputs.cache
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\obj\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.AssemblyInfo.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\obj\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.dll
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\obj\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.pdb
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\bin\Debug\netcoreapp2.2\Agca.ECommerce.Core.dll
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\bin\Debug\netcoreapp2.2\Agca.ECommerce.Entities.dll
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\bin\Debug\netcoreapp2.2\Agca.ECommerce.Core.pdb
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\bin\Debug\netcoreapp2.2\Agca.ECommerce.Entities.pdb
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.DataAccess\obj\Debug\netcoreapp2.2\Agca.ECommerce.DataAccess.csproj.CopyComplete

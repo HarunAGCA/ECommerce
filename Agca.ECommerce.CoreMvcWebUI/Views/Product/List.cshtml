@@ -1,0 +1,37 @@
+﻿@model Agca.ECommerce.CoreMvcWebUI.Models.ProductListViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+        <table class="table table-striped table-responsive table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Product Id</th>
+                    <th>Product Name</th>
+                    <th>Unit Price</th>
+                    <th>Units In Stock</th>
+                    <th>Category Id</th>
+
+                </tr >
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Products)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td>@product.UnitPrice</td>
+                        <td>@product.UnitsInStock</td>
+                        <td>@product.CategoryId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+<html-product-pager
+                    page-size="@Model.PageSize" 
+                    page-count="@Model.PageCount" 
+                    current-page="@Model.CurrentPage" 
+                    category-Id="@Model.CurrentCategoryId">
+
+</html-product-pager>

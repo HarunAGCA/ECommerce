@@ -1,0 +1,9 @@
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\bin\Debug\netcoreapp2.2\Agca.ECommerce.Core.deps.json
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\bin\Debug\netcoreapp2.2\Agca.ECommerce.Core.dll
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\bin\Debug\netcoreapp2.2\Agca.ECommerce.Core.pdb
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\obj\Debug\netcoreapp2.2\Agca.ECommerce.Core.csprojAssemblyReference.cache
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\obj\Debug\netcoreapp2.2\Agca.ECommerce.Core.csproj.CoreCompileInputs.cache
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\obj\Debug\netcoreapp2.2\Agca.ECommerce.Core.AssemblyInfoInputs.cache
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\obj\Debug\netcoreapp2.2\Agca.ECommerce.Core.AssemblyInfo.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\obj\Debug\netcoreapp2.2\Agca.ECommerce.Core.dll
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.Core\obj\Debug\netcoreapp2.2\Agca.ECommerce.Core.pdb

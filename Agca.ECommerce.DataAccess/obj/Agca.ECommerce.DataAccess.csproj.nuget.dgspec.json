@@ -1,0 +1,183 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.DataAccess\\Agca.ECommerce.DataAccess.csproj": {}
+  },
+  "projects": {
+    "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\Agca.ECommerce.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\Agca.ECommerce.Core.csproj",
+        "projectName": "Agca.ECommerce.Core",
+        "projectPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\Agca.ECommerce.Core.csproj",
+        "packagesPath": "C:\\Users\\HARUN\\.nuget\\packages\\",
+        "outputPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HARUN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.DataAccess\\Agca.ECommerce.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.DataAccess\\Agca.ECommerce.DataAccess.csproj",
+        "projectName": "Agca.ECommerce.DataAccess",
+        "projectPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.DataAccess\\Agca.ECommerce.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\HARUN\\.nuget\\packages\\",
+        "outputPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HARUN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\Agca.ECommerce.Core.csproj": {
+                "projectPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\Agca.ECommerce.Core.csproj"
+              },
+              "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Entities\\Agca.ECommerce.Entities.csproj": {
+                "projectPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Entities\\Agca.ECommerce.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Entities\\Agca.ECommerce.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Entities\\Agca.ECommerce.Entities.csproj",
+        "projectName": "Agca.ECommerce.Entities",
+        "projectPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Entities\\Agca.ECommerce.Entities.csproj",
+        "packagesPath": "C:\\Users\\HARUN\\.nuget\\packages\\",
+        "outputPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\HARUN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\Agca.ECommerce.Core.csproj": {
+                "projectPath": "D:\\PROJECTS\\WEB\\Agca\\Agca.ECommerce.Core\\Agca.ECommerce.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
