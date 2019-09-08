@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.Business.Concrete;
 using Agca.ECommerce.CoreMvcWebUI.Middlewares;
+using Agca.ECommerce.CoreMvcWebUI.Services;
 using Agca.ECommerce.DataAccess.Abstract;
 using Agca.ECommerce.DataAccess.Concrete.EntityFramework;
 using Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts;
@@ -27,6 +28,11 @@ namespace Agca.ECommerce.CoreMvcWebUI
             services.AddScoped<IProductDal, EfProductDal>();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
+            services.AddScoped<ICartService, CartManager>();
+            services.AddSingleton<ICartSessionService, CartSessionService>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSession();
+            services.AddDistributedMemoryCache();
 
             
         }
@@ -41,6 +47,7 @@ namespace Agca.ECommerce.CoreMvcWebUI
 
             app.UseFileServer();
             app.UseNodeModules(env.ContentRootPath);
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
         }
     }

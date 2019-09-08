@@ -12,16 +12,12 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
     public class ProductController : Controller
     {
         private IProductService _productService;
+
         private const int PageSize = 10;
 
         public ProductController(IProductService productService)
         {
             _productService = productService;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
         public IActionResult List(int categoryId = 0, int page = 1)
@@ -37,6 +33,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             };
 
             return View(productListViewModel);
-        }
+        } 
+
     }
 }

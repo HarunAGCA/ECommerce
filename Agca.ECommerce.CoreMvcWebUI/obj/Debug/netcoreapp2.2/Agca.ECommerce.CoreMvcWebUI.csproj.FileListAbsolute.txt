@@ -32,3 +32,4 @@ D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Agca.EC
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\CategoryList\Default.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\CartSummary\Default.g.cshtml.cs
