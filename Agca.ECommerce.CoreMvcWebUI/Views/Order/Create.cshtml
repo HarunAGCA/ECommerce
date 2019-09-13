@@ -1,0 +1,62 @@
+﻿@model Agca.ECommerce.CoreMvcWebUI.Models.OrderViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-success mb-3">
+    <div class="card-header bg-success text-white" style="font-size :20pt">Order Items</div>
+    <div class="card-body text-dark">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Product Quantity
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td>
+                            @item.Product.Name
+                        </td>
+                        <td>
+                            @item.ProductQuantity
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="card border-success mb-3">
+    <div class="card-header text-white bg-success " style="font-size : 20pt">Shipping Informations</div>
+    <div class="card-body text-dark">
+
+        <h5 class="card-title font-italic">Customer First Name</h5>
+        <p class="card-text font-weight-light">@Model.ShippingDetails.CustomerFirstName</p>
+        <hr />
+        <h5 class="card-title font-italic">Customer Last Name</h5>
+        <p class="card-text font-weight-light">@Model.ShippingDetails.CustomerLastName</p>
+        <hr />
+        <h5 class="card-title font-italic">Customer Turkish Id</h5>
+        <p class="card-text font-weight-light">@Model.ShippingDetails.CustomerTurkishId</p>
+        <hr />
+        <h5 class="card-title font-italic">E Mail</h5>
+        <p class="card-text font-weight-light">@Model.ShippingDetails.EMail</p>
+        <hr />
+        <h5 class="card-title font-italic">Phone Number</h5>
+        <p class="card-text font-weight-light">@Model.ShippingDetails.PhoneNumber</p>
+        <hr />
+        <h5 class="card-title font-italic">Shipping Adress</h5>
+        <p class="card-text font-weight-light">@Model.ShippingDetails.ShippingAdress</p>
+    </div>
+</div>

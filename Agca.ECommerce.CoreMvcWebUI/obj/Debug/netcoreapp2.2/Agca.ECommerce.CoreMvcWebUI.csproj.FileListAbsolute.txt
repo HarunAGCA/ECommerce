@@ -33,3 +33,7 @@ D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\V
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\CategoryList\Default.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\CartSummary\Default.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Cart\ListCart.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Cart\View.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\ShippingDetails\Create.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Order\Create.g.cshtml.cs

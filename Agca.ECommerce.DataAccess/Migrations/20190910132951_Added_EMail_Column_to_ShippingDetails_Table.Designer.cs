@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agca.ECommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    [Migration("20190903054553_initalcreate")]
-    partial class initalcreate
+    [Migration("20190910132951_Added_EMail_Column_to_ShippingDetails_Table")]
+    partial class Added_EMail_Column_to_ShippingDetails_Table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,29 @@ namespace Agca.ECommerce.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.ShippingDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CustomerFirstName");
+
+                    b.Property<string>("CustomerLastName");
+
+                    b.Property<string>("CustomerTurkishId");
+
+                    b.Property<string>("EMail");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("ShippingAdress");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShippingDetails");
                 });
 #pragma warning restore 612, 618
         }
