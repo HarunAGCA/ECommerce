@@ -4,14 +4,16 @@ using Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Agca.ECommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    partial class ECommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20190916114704_was_editted_some_tables")]
+    partial class was_editted_some_tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,11 +40,7 @@ namespace Agca.ECommerce.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ShippingDetailsId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ShippingDetailsId");
 
                     b.ToTable("Orders");
                 });
@@ -82,11 +80,16 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.Property<string>("EMail");
 
+                    b.Property<int>("OrderId");
+
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("ShippingAdress");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
 
                     b.ToTable("ShippingDetails");
                 });
@@ -112,18 +115,19 @@ namespace Agca.ECommerce.DataAccess.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Order", b =>
-                {
-                    b.HasOne("Agca.ECommerce.Entities.Concrete.ShippingDetails", "ShippingDetails")
-                        .WithMany()
-                        .HasForeignKey("ShippingDetailsId");
-                });
-
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Product", b =>
                 {
                     b.HasOne("Agca.ECommerce.Entities.Concrete.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.ShippingDetails", b =>
+                {
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Order", "Order")
+                        .WithOne("ShippingDetails")
+                        .HasForeignKey("Agca.ECommerce.Entities.Concrete.ShippingDetails", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

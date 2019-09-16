@@ -4,18 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="card border-success mb-3">
-    <div class="card-header bg-success text-white" style="font-size :20pt">Order Items</div>
+<div class="card border-info mb-3">
+    <div class="card-header text-dark" style="font-size :20pt">Order Items</div>
     <div class="card-body text-dark">
 
-        <table class="table">
+        <table class="table text-center">
             <thead>
                 <tr>
-                    <th>
+                    <th class="text-left">
                         Product Name
                     </th>
                     <th>
                         Product Quantity
+                    </th>
+                    <th>
+                        Product Unit Price
                     </th>
                 </tr>
             </thead>
@@ -23,22 +26,38 @@
                 @foreach (var item in Model.OrderItems)
                 {
                     <tr>
-                        <td>
+                        <td class="text-left">
                             @item.Product.Name
                         </td>
                         <td>
                             @item.ProductQuantity
                         </td>
+                        <td>
+                            @item.Product.UnitPrice
+                        </td>
                     </tr>
+
                 }
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="font-weight-light">
+                        <span class="font-weight-bold">
+                            Total :
+                        </span>
+                        @Model.TotalPrice <i class="fa fa-turkish-lira"></i>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 </div>
 
 
-<div class="card border-success mb-3">
-    <div class="card-header text-white bg-success " style="font-size : 20pt">Shipping Informations</div>
+<div class="card border-warning mb-3">
+    <div class="card-header text-dark" style="font-size : 20pt">Shipping Informations</div>
     <div class="card-body text-dark">
 
         <h5 class="card-title font-italic">Customer First Name</h5>
@@ -60,3 +79,85 @@
         <p class="card-text font-weight-light">@Model.ShippingDetails.ShippingAdress</p>
     </div>
 </div>
+
+
+
+<div class="card border-success mb-3">
+    <div class="card-header text-dark" style="font-size :20pt">Billing</div>
+    <div class="card-body text-dark">
+
+        <div class="row font-weight-light">
+            <div class="col-md-8 text-left">
+                <p>Turkish ID : @Model.ShippingDetails.CustomerTurkishId</p>
+                <p>First Name : @Model.ShippingDetails.CustomerFirstName</p>
+                <p>Last Name : @Model.ShippingDetails.CustomerLastName</p>
+                
+            </div>
+
+            <div class="col-md-4 text-left">
+                <p>Phone Number : @Model.ShippingDetails.PhoneNumber</p>
+                <p>E-Mail : @Model.ShippingDetails.EMail</p>
+                <p>Address : @Model.ShippingDetails.ShippingAdress</p>
+            </div>
+
+        </div>
+
+        <hr />
+        <table class="table text-center font-weight-light">
+            <thead>
+                <tr>
+                    <th class="text-left">
+                        Product Name
+                    </th>
+                    <th>
+                        Product Quantity
+                    </th>
+                    <th>
+                        Product Unit Price
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                <tr>
+                    <td class="text-left">
+                        @item.Product.Name
+                    </td>
+                    <td>
+                        @item.ProductQuantity
+                    </td>
+                    <td>
+                        @item.Product.UnitPrice
+                    </td>
+                    <td>
+                        @(item.ProductQuantity*item.Product.UnitPrice)
+                    </td>
+                </tr>
+
+                }
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <span>
+                        Total :
+                    </span>
+                    @Model.TotalPrice <i class="fa fa-turkish-lira"></i>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<a class="btn bg-success" asp-action="confirm" asp-controller="order" asp-method="get"><span class="text-white"> <i class="fa fa-check"></i> Confirm Order</span></a>

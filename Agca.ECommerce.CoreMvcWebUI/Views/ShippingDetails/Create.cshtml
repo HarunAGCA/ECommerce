@@ -6,7 +6,7 @@
 
 <h1>Shipping Details Form</h1>
 
-<form asp-action="create" asp-controller="ShippingDetails" method="post">
+<form asp-action="create" asp-controller="Order" method="post">
     <div class="form-group">
         <label asp-for="@Model.ShippingDetails.CustomerTurkishId" style="color:blue">Turkish ID No</label>
         <input class="form-control" type="number" maxlength="11" asp-for="@Model.ShippingDetails.CustomerTurkishId" placeholder="Turkish Id No" />
@@ -33,7 +33,7 @@
 
     <div class="form-group">
         <label asp-for="@Model.ShippingDetails.PhoneNumber" style="color:blue">Phone Number</label>
-        <input class="form-control" asp-for="@Model.ShippingDetails.PhoneNumber" placeholder="Phone Number" />
+        <input class="form-control" type="number" asp-for="@Model.ShippingDetails.PhoneNumber" placeholder="Phone Number" />
         <span asp-validation-for="@Model.ShippingDetails.PhoneNumber" style="color:red"></span>
     </div>
 

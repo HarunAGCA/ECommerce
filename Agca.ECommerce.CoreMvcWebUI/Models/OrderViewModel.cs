@@ -11,5 +11,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Models
     {
         public List<OrderItem> OrderItems { get; set; }
         public ShippingDetails ShippingDetails { get; set; }
+        public decimal TotalPrice { get { return OrderItems.Sum(o => o.Product.UnitPrice * o.ProductQuantity); } }
+        
     }
 }

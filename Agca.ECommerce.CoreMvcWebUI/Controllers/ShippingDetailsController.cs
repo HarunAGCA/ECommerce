@@ -25,7 +25,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             shippingDetailsViewModel.ShippingDetails = new ShippingDetails();
             return View(shippingDetailsViewModel);
         }
-
+        /*
         [HttpPost]
         public IActionResult Create(ShippingDetailsViewModel shippingDetailsViewModel)
 
@@ -38,6 +38,6 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             TempData.SetNonSerializableObject("shippingDetailsViewModel", shippingDetailsViewModel);
             return RedirectToAction("create","Order");
 
-        }
+        }*/
     }
 }
