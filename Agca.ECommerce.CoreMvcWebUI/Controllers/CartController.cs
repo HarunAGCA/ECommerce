@@ -13,19 +13,29 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 {
     public class CartController : Controller
     {
+        #region Fields
         private ICartSessionService _cartSessionService;
         private ICartService _cartService;
         private IProductService _productService;
-        private IShippingDetailsService _shippingDetailsService;
+        private IOrderViewModelSessionService _orderViewModelSessionService;
+        #endregion
 
-        public CartController(ICartSessionService cartSessionService, ICartService cartService, IProductService productService, IShippingDetailsService shippingDetailsService)
+        #region Ctor
+        public CartController(
+            ICartSessionService cartSessionService,
+            ICartService cartService,
+            IProductService productService,
+            IOrderViewModelSessionService orderViewModelSessionService)
         {
             _cartSessionService = cartSessionService;
             _cartService = cartService;
             _productService = productService;
-            _shippingDetailsService = shippingDetailsService;
+            _cartSessionService = cartSessionService;
+            _orderViewModelSessionService = orderViewModelSessionService;
         }
+        #endregion
 
+        #region Methods
         public IActionResult AddToCart(int productId)
         {
             Product productToBeAdded = _productService.Get(productId);
@@ -60,22 +70,32 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 
         public IActionResult Complete()
         {
+            var cart = _cartSessionService.GetCart();
+
+            if(cart.CartLines.Count <= 0)
+            {
+                TempData["message"] = "There is no any product in your shopping cart.";
+                return RedirectToAction("List", "Product");
+            }
+
+            List<OrderItem> orderItems = new List<OrderItem>();
+
+            foreach (var cartLine in cart.CartLines)
+            {
+                OrderItem orderItem = new OrderItem();
+                orderItem.ProductId = cartLine.Product.Id;
+                orderItem.Product = cartLine.Product;
+                orderItem.Quantity = cartLine.Quantity;
+                orderItems.Add(orderItem);
+            }
+
+
+            OrderViewModel orderViewModel = new OrderViewModel();
+            orderViewModel.OrderItems = orderItems;
+            _orderViewModelSessionService.SetOrderViewModel(orderViewModel);
             return RedirectToAction("create", "ShippingDetails");
         }
-
-        //[HttpPost]
-        //public IActionResult Complete(ShippingDetailsViewModel shippingDetailsViewModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(shippingDetailsViewModel);
-        //    }
-
-        //    _shippingDetailsService.Add(shippingDetailsViewModel.ShippingDetails);
-        //    TempData.Add("message", "Shipping informations was succesfull saved.");
-
-        //    return RedirectToAction("create", "shippingDetails");
-        //}
+        #endregion
 
     }
 }

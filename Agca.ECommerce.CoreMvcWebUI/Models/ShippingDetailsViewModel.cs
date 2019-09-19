@@ -8,6 +8,6 @@ namespace Agca.ECommerce.CoreMvcWebUI.Models
 {
     public class ShippingDetailsViewModel
     {
-        public ShippingDetails ShippingDetails { get; set; }
+        public Shipment Shipment { get; set; }
     }
 }

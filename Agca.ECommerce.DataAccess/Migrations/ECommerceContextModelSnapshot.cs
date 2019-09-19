@@ -32,19 +32,70 @@ namespace Agca.ECommerce.DataAccess.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("EMail");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("TurkishIdNo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
+                });
+
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ShippingDetailsId");
+                    b.Property<int>("CustomerId");
+
+                    b.Property<decimal>("TotalPrice");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ShippingDetailsId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Payment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("AmountOfPayment");
+
+                    b.Property<string>("CreditCardCVC");
+
+                    b.Property<string>("CreditCardExpiryDate");
+
+                    b.Property<string>("CreditCardNo");
+
+                    b.Property<string>("CreditCardOwnerName");
+
+                    b.Property<DateTime>("DateOfPayment");
+
+                    b.Property<int>("OrderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Product", b =>
@@ -68,27 +119,36 @@ namespace Agca.ECommerce.DataAccess.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.ShippingDetails", b =>
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Shipment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerFirstName");
+                    b.Property<int>("OrderId");
 
-                    b.Property<string>("CustomerLastName");
+                    b.Property<string>("ReceiverAddress");
 
-                    b.Property<string>("CustomerTurkishId");
+                    b.Property<string>("ReceiverEMail");
 
-                    b.Property<string>("EMail");
+                    b.Property<string>("ReceiverFirstName");
 
-                    b.Property<string>("PhoneNumber");
+                    b.Property<string>("ReceiverLastName");
 
-                    b.Property<string>("ShippingAdress");
+                    b.Property<string>("ReceiverPhoneNumber");
+
+                    b.Property<string>("ReceiverTurkishIdNo");
+
+                    b.Property<DateTime>("TimeOfDelivery");
+
+                    b.Property<DateTime>("TimeOfShipping");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingDetails");
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.ToTable("Shipments");
                 });
 
             modelBuilder.Entity("Agca.ECommerce.Entities.OrderItem", b =>
@@ -99,9 +159,9 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.Property<int>("OrderId");
 
-                    b.Property<int?>("ProductId");
+                    b.Property<int>("ProductId");
 
-                    b.Property<int>("ProductQuantity");
+                    b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 
@@ -114,9 +174,18 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Order", b =>
                 {
-                    b.HasOne("Agca.ECommerce.Entities.Concrete.ShippingDetails", "ShippingDetails")
-                        .WithMany()
-                        .HasForeignKey("ShippingDetailsId");
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Payment", b =>
+                {
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Order", "Order")
+                        .WithOne("Payment")
+                        .HasForeignKey("Agca.ECommerce.Entities.Concrete.Payment", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Product", b =>
@@ -124,6 +193,14 @@ namespace Agca.ECommerce.DataAccess.Migrations
                     b.HasOne("Agca.ECommerce.Entities.Concrete.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Shipment", b =>
+                {
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Order", "Order")
+                        .WithOne("Shipment")
+                        .HasForeignKey("Agca.ECommerce.Entities.Concrete.Shipment", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -136,7 +213,8 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.HasOne("Agca.ECommerce.Entities.Concrete.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

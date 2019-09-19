@@ -10,13 +10,18 @@ namespace Agca.ECommerce.CoreMvcWebUI.Services
 {
     public class CartSessionService : ICartSessionService
     {
+        #region Fields
         private IHttpContextAccessor _httpContextAccessor;
+        #endregion
 
+        #region Ctor
         public CartSessionService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
+        #endregion
 
+        #region Methods
         public Cart GetCart()
         {
             Cart cart = _httpContextAccessor.HttpContext.Session.GetObject<Cart>("cart"); 
@@ -32,5 +37,6 @@ namespace Agca.ECommerce.CoreMvcWebUI.Services
         {
             _httpContextAccessor.HttpContext.Session.SetObject("cart", cart);
         }
+        #endregion
     }
 }

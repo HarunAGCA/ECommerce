@@ -6,9 +6,8 @@ using Agca.ECommerce.Entities.Concrete;
 
 namespace Agca.ECommerce.DataAccess.Abstract
 {
-    public interface IShippingDetailsDal : IEntityRepository<ShippingDetails>
+    public interface IPaymentDal : IEntityRepository<Payment>
     {
-        
 
     }
 }

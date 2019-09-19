@@ -12,12 +12,12 @@ namespace Agca.ECommerce.CoreMvcWebUI.ValidationRules.FluentValidation
     {
         public ShippingDetailsViewModelValidator()
         {
-            RuleFor(m => m.ShippingDetails.CustomerFirstName).NotEmpty().MaximumLength(20);
-            RuleFor(m => m.ShippingDetails.CustomerLastName).NotEmpty().MaximumLength(20);
-            RuleFor(m => m.ShippingDetails.CustomerTurkishId).NotEmpty().Length(11);
-            RuleFor(m => m.ShippingDetails.PhoneNumber).NotEmpty();
-            RuleFor(m => m.ShippingDetails.EMail).NotEmpty().EmailAddress();
-            RuleFor(m => m.ShippingDetails.ShippingAdress).NotEmpty();
+            RuleFor(m => m.Shipment.ReceiverFirstName).NotEmpty().MaximumLength(20);
+            RuleFor(m => m.Shipment.ReceiverLastName).NotEmpty().MaximumLength(20);
+            RuleFor(m => m.Shipment.ReceiverTurkishIdNo).NotEmpty().Length(11).Matches(@"^[0-9]{11}$");
+            RuleFor(m => m.Shipment.ReceiverPhoneNumber).NotEmpty().Matches(@"\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})");
+            RuleFor(m => m.Shipment.ReceiverEMail).NotEmpty().EmailAddress();
+            RuleFor(m => m.Shipment.ReceiverAddress).NotEmpty();
 
         }
     }

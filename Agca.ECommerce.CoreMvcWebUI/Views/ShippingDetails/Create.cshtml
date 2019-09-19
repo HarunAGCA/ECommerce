@@ -6,43 +6,43 @@
 
 <h1>Shipping Details Form</h1>
 
-<form asp-action="create" asp-controller="Order" method="post">
+<form asp-action="create" asp-controller="ShippingDetails" method="post">
     <div class="form-group">
-        <label asp-for="@Model.ShippingDetails.CustomerTurkishId" style="color:blue">Turkish ID No</label>
-        <input class="form-control" type="number" maxlength="11" asp-for="@Model.ShippingDetails.CustomerTurkishId" placeholder="Turkish Id No" />
-        <span asp-validation-for="@Model.ShippingDetails.CustomerTurkishId" style="color:red"></span>
+        <label asp-for="@Model.Shipment.ReceiverTurkishIdNo" style="color:blue">Turkish ID No</label>
+        <input class="form-control" type="number" maxlength="11" asp-for="@Model.Shipment.ReceiverTurkishIdNo" placeholder="XXXXXXXXXXX" pattern="^[0-9]{11}$"/>
+        <span asp-validation-for="@Model.Shipment.ReceiverTurkishIdNo" style="color:red"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@Model.ShippingDetails.CustomerFirstName" style="color:blue">First Name</label>
-        <input class="form-control" asp-for="@Model.ShippingDetails.CustomerFirstName" placeholder="First Name" />
-        <span asp-validation-for="@Model.ShippingDetails.CustomerFirstName" style="color:red"></span>
+        <label asp-for="@Model.Shipment.ReceiverFirstName" style="color:blue">First Name</label>
+        <input class="form-control" asp-for="@Model.Shipment.ReceiverFirstName" placeholder="First Name" />
+        <span asp-validation-for="@Model.Shipment.ReceiverFirstName" style="color:red"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@Model.ShippingDetails.CustomerLastName" style="color:blue">Last Name</label>
-        <input class="form-control" asp-for="@Model.ShippingDetails.CustomerLastName" placeholder="Last Name" />
-        <span asp-validation-for="@Model.ShippingDetails.CustomerLastName" style="color:red"></span>
+        <label asp-for="@Model.Shipment.ReceiverLastName" style="color:blue">Last Name</label>
+        <input class="form-control" asp-for="@Model.Shipment.ReceiverLastName" placeholder="Last Name" />
+        <span asp-validation-for="@Model.Shipment.ReceiverLastName" style="color:red"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@Model.ShippingDetails.EMail" style="color:blue">E-Mail</label>
-        <input class="form-control" asp-for="@Model.ShippingDetails.EMail" placeholder="E Mail" />
-        <span asp-validation-for="@Model.ShippingDetails.EMail" style="color:red"></span>
+        <label asp-for="@Model.Shipment.ReceiverEMail" style="color:blue">E-Mail</label>
+        <input class="form-control" asp-for="@Model.Shipment.ReceiverEMail" placeholder="E Mail" />
+        <span asp-validation-for="@Model.Shipment.ReceiverEMail" style="color:red"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@Model.ShippingDetails.PhoneNumber" style="color:blue">Phone Number</label>
-        <input class="form-control" type="number" asp-for="@Model.ShippingDetails.PhoneNumber" placeholder="Phone Number" />
-        <span asp-validation-for="@Model.ShippingDetails.PhoneNumber" style="color:red"></span>
+        <label asp-for="@Model.Shipment.ReceiverPhoneNumber" style="color:blue">Phone Number</label>
+        <input class="form-control" type="tel" asp-for="@Model.Shipment.ReceiverPhoneNumber" placeholder="(XXX) XXX XXXX" pattern="\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})"/>
+        <span asp-validation-for="@Model.Shipment.ReceiverPhoneNumber" style="color:red"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="@Model.ShippingDetails.ShippingAdress" style="color:blue">Shipping Adress</label>
-        <input class="form-control" asp-for="@Model.ShippingDetails.ShippingAdress" placeholder="Shipping Adress" />
-        <span asp-validation-for="@Model.ShippingDetails.ShippingAdress" style="color:red"></span>
+        <label asp-for="@Model.Shipment.ReceiverAddress" style="color:blue">Shipping Adress</label>
+        <input class="form-control" asp-for="@Model.Shipment.ReceiverAddress" placeholder="Shipping Adress" />
+        <span asp-validation-for="@Model.Shipment.ReceiverAddress" style="color:red"></span>
     </div>
 
-    <input class="btn btn-md btn-success" type="submit" value="Create Order" />
+    <input class="btn btn-md btn-success" type="submit" value="Confirm" />
 </form>
 

@@ -38,7 +38,7 @@ namespace Agca.ECommerce.Business.Concrete
 
         public List<Product> GetByCategory(int categoryId)
         {
-            return _productDal.GetList(p => p.CategoryId == categoryId || categoryId == 0);
+            return _productDal.GetList(p => p.Category.Id == categoryId || categoryId == 0);
         }
 
         public void Update(Product product)

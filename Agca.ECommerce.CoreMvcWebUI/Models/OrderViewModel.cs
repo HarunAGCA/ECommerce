@@ -9,9 +9,10 @@ namespace Agca.ECommerce.CoreMvcWebUI.Models
 {
     public class OrderViewModel
     {
+        public Order Order { get; set; }
+        public Shipment Shipment { get; set; }
+        public Payment Payment { get; set; }
         public List<OrderItem> OrderItems { get; set; }
-        public ShippingDetails ShippingDetails { get; set; }
-        public decimal TotalPrice { get { return OrderItems.Sum(o => o.Product.UnitPrice * o.ProductQuantity); } }
-        
+
     }
 }

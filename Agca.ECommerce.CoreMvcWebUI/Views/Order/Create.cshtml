@@ -30,7 +30,7 @@
                             @item.Product.Name
                         </td>
                         <td>
-                            @item.ProductQuantity
+                            @item.Quantity
                         </td>
                         <td>
                             @item.Product.UnitPrice
@@ -47,7 +47,7 @@
                         <span class="font-weight-bold">
                             Total :
                         </span>
-                        @Model.TotalPrice <i class="fa fa-turkish-lira"></i>
+                        @Model.Order.TotalPrice <i class="fa fa-turkish-lira"></i>
                     </td>
                 </tr>
             </tbody>
@@ -61,22 +61,22 @@
     <div class="card-body text-dark">
 
         <h5 class="card-title font-italic">Customer First Name</h5>
-        <p class="card-text font-weight-light">@Model.ShippingDetails.CustomerFirstName</p>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverFirstName</p>
         <hr />
         <h5 class="card-title font-italic">Customer Last Name</h5>
-        <p class="card-text font-weight-light">@Model.ShippingDetails.CustomerLastName</p>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverLastName</p>
         <hr />
         <h5 class="card-title font-italic">Customer Turkish Id</h5>
-        <p class="card-text font-weight-light">@Model.ShippingDetails.CustomerTurkishId</p>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverTurkishIdNo</p>
         <hr />
         <h5 class="card-title font-italic">E Mail</h5>
-        <p class="card-text font-weight-light">@Model.ShippingDetails.EMail</p>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverEMail</p>
         <hr />
         <h5 class="card-title font-italic">Phone Number</h5>
-        <p class="card-text font-weight-light">@Model.ShippingDetails.PhoneNumber</p>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverPhoneNumber</p>
         <hr />
-        <h5 class="card-title font-italic">Shipping Adress</h5>
-        <p class="card-text font-weight-light">@Model.ShippingDetails.ShippingAdress</p>
+        <h5 class="card-title font-italic">Shipping Address</h5>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverAddress</p>
     </div>
 </div>
 
@@ -88,16 +88,16 @@
 
         <div class="row font-weight-light">
             <div class="col-md-8 text-left">
-                <p>Turkish ID : @Model.ShippingDetails.CustomerTurkishId</p>
-                <p>First Name : @Model.ShippingDetails.CustomerFirstName</p>
-                <p>Last Name : @Model.ShippingDetails.CustomerLastName</p>
+                <p>Turkish ID : @Model.Shipment.ReceiverTurkishIdNo</p>
+                <p>First Name : @Model.Shipment.ReceiverFirstName</p>
+                <p>Last Name : @Model.Shipment.ReceiverLastName</p>
                 
             </div>
 
             <div class="col-md-4 text-left">
-                <p>Phone Number : @Model.ShippingDetails.PhoneNumber</p>
-                <p>E-Mail : @Model.ShippingDetails.EMail</p>
-                <p>Address : @Model.ShippingDetails.ShippingAdress</p>
+                <p>Phone Number : @Model.Shipment.ReceiverPhoneNumber</p>
+                <p>E-Mail : @Model.Shipment.ReceiverEMail</p>
+                <p>Address : @Model.Shipment.ReceiverAddress</p>
             </div>
 
         </div>
@@ -128,13 +128,13 @@
                         @item.Product.Name
                     </td>
                     <td>
-                        @item.ProductQuantity
+                        @item.Quantity
                     </td>
                     <td>
                         @item.Product.UnitPrice
                     </td>
                     <td>
-                        @(item.ProductQuantity*item.Product.UnitPrice)
+                        @(item.Quantity*item.Product.UnitPrice)
                     </td>
                 </tr>
 
@@ -150,7 +150,7 @@
                     <span>
                         Total :
                     </span>
-                    @Model.TotalPrice <i class="fa fa-turkish-lira"></i>
+                    @Model.Order.TotalPrice <i class="fa fa-turkish-lira"></i>
                 </td>
             </tr>
             </tbody>
@@ -160,4 +160,4 @@
 
 
 
-<a class="btn bg-success" asp-action="confirm" asp-controller="order" asp-method="get"><span class="text-white"> <i class="fa fa-check"></i> Confirm Order</span></a>
+<a class="btn bg-success" asp-action="confirm" asp-controller="order" asp-method="get"><span class="text-white">Ok</span></a>

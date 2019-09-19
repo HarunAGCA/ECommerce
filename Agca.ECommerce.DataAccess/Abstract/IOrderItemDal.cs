@@ -6,7 +6,7 @@ using Agca.ECommerce.Entities;
 
 namespace Agca.ECommerce.DataAccess.Abstract
 {
-    public interface IOrderItemDal:IEntityRepository<OrderItem>
+    public interface IOrderItemDal: IEntityRepository<OrderItem>
     {
     }
 }

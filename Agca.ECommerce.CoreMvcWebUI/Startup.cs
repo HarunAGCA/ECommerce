@@ -36,17 +36,24 @@ namespace Agca.ECommerce.CoreMvcWebUI
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<ICartService, CartManager>();
-            services.AddScoped<IShippingDetailsService, ShippingDetailsManager>();
-            services.AddScoped<IShippingDetailsDal, EfShippingDetailsDal>();
-            services.AddScoped<IOrderService,OrderManager>();
-            services.AddScoped<IOrderDal, EfOrderDal>();     
+            services.AddScoped<IOrderService, OrderManager>();
+            services.AddScoped<IOrderDal, EfOrderDal>();
+            services.AddScoped<IOrderItemDal, EfOrderItemDal>();
+            services.AddScoped<IOrderItemService, OrderItemManager>();
+            services.AddScoped<IShipmentDal, EfShipmentDal>();
+            services.AddScoped<IShipmentService, ShipmentManager>();
+            services.AddScoped<IPaymentService, PaymentManager>();
+            services.AddScoped<IPaymentDal, EfPaymentDal>();
             services.AddSingleton<ICartSessionService, CartSessionService>();
+            services.AddSingleton<ICustomerSessionService, CustomerSessionService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IOrderViewModelSessionService, OrderViewModelSessionService>();
             services.AddTransient<IValidator<ShippingDetailsViewModel>, ShippingDetailsViewModelValidator>();
+            services.AddTransient<IValidator<PaymentViewModel>, PaymentViewModelValidator>();
             services.AddSession();
             services.AddDistributedMemoryCache();
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
