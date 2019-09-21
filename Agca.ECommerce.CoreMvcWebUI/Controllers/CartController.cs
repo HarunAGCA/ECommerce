@@ -42,8 +42,13 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 
             Cart cart = _cartSessionService.GetCart();
 
+            if (productToBeAdded.UnitsInStock <= 0)
+            {
+                TempData["message"] = String.Format("{0} is there isn't in stock.",productToBeAdded.Name);
+                return RedirectToAction("List", "Product");
+            }
+              
             _cartService.AddToCart(cart, productToBeAdded);
-
             _cartSessionService.SetCart(cart);
 
             TempData.Add("message", String.Format("{0} successfully was added to the cart.", productToBeAdded.Name));
@@ -72,12 +77,26 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         {
             var cart = _cartSessionService.GetCart();
 
-            if(cart.CartLines.Count <= 0)
+            if (cart.CartLines.Count <= 0)
             {
+                
+                RedirectToAction("List", "Product");
                 TempData["message"] = "There is no any product in your shopping cart.";
-                return RedirectToAction("List", "Product");
             }
+            var query = cart.CartLines.Where(cl => cl.Product.UnitsInStock < cl.Quantity).ToList();
+            if (query.Count > 0)
+            {
+                foreach (var cartLine in query)
+                {
+                    Remove(cartLine.Product.Id);
+                    TempData["message"] = null;
+                    TempData["message"] = String.Format("{0} is no in stock enough. You can buy as maximum as in stock.", cartLine.Product.Name);
 
+
+                }
+                
+                return RedirectToAction("ListCart", "Cart");
+            }
             List<OrderItem> orderItems = new List<OrderItem>();
 
             foreach (var cartLine in cart.CartLines)

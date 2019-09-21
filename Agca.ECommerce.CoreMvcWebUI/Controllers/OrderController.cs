@@ -15,6 +15,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         private IOrderItemService _orderItemService;
         private IOrderViewModelSessionService _orderViewModelSessionService;
         private IPaymentService _paymentService;
+        private IProductService _productService;
         #endregion
 
         #region Ctor
@@ -24,7 +25,8 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             IShipmentService shipmentService,
             IOrderItemService orderItemService,
             IOrderViewModelSessionService orderViewModelSessionService,
-            IPaymentService paymentService
+            IPaymentService paymentService,
+            IProductService productService
             )
         {
             _cartSessionService = cartSessionService;
@@ -33,6 +35,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             _orderItemService = orderItemService;
             _orderViewModelSessionService = orderViewModelSessionService;
             _paymentService = paymentService;
+            _productService = productService;
         }
         #endregion
 
@@ -70,29 +73,22 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             foreach (var orderItem in orderViewModelSession.OrderItems)
             {
                 _orderItemService.Add(orderItem);
+                
+                //Stock decrement
+                var product = _productService.Get(orderItem.ProductId);
+                product.UnitsInStock -= orderItem.Quantity;
+                _productService.Update(product);
+
             }
 
+            _cartSessionService.SetCart(new Cart());
+            _orderViewModelSessionService.SetOrderViewModel(null);
             TempData["message"] = "Your order has been received. You can see order summary on below.";
             return View(orderViewModelSession);
         }
 
         public IActionResult Confirm()
         {
-            if (_orderViewModelSessionService.GetOrderViewModel() != null)
-            {
-                if (_orderViewModelSessionService.GetOrderViewModel().Payment == null)
-                {
-                    TempData["message"] = "You must provide the payment information.";
-                    return RedirectToAction("CreditCard", "Payment");
-                }
-            }
-            else
-            {
-                TempData["message"] = "You must complete the shopping.";
-                return RedirectToAction("ListCart", "Cart");
-            }
-            _cartSessionService.SetCart(new Cart());
-            _orderViewModelSessionService.SetOrderViewModel(null);
             return RedirectToAction("list", "product");
         }
         #endregion
