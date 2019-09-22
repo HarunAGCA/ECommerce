@@ -6,7 +6,7 @@
 
 <h1>Shipping Details Form</h1>
 
-<form asp-action="create" asp-controller="ShippingDetails" method="post">
+<form asp-action="create" asp-controller="ShippingDetails" method="post" class="was-validated">
     <div class="form-group">
         <label asp-for="@Model.Shipment.ReceiverTurkishIdNo" style="color:blue">Turkish ID No</label>
         <input class="form-control" type="number" maxlength="11" asp-for="@Model.Shipment.ReceiverTurkishIdNo" placeholder="XXXXXXXXXXX" pattern="^[0-9]{11}$"/>

@@ -41,7 +41,6 @@ namespace Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts
                 .HasOne(oi => oi.Product);
 
 
-
         }
 
         public DbSet<Product> Products { get; set; }

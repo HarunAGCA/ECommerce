@@ -23,7 +23,7 @@ namespace Agca.ECommerce.Business.Concrete
 
         public void Delete(int productId)
         {
-            _productDal.Add(new Product { Id = productId });
+            _productDal.Delete(new Product { Id = productId });
         }
 
         public Product Get(int productId)

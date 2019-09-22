@@ -38,3 +38,9 @@ D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\V
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\ShippingDetails\Create.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Order\Create.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Payment\CreditCard.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Order\Summary.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\ListProducts.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_AdminLayout.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\AddProduct.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\AdminCategoryList\Default.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\UpdateProduct.g.cshtml.cs

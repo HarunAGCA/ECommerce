@@ -22,6 +22,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.TagHelpers
         [HtmlAttributeName("category-Id")]
         public int CategoryId { get; set; }
 
+
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
@@ -31,7 +32,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.TagHelpers
             for (int i = 1; i <= PageCount; i++)
             {
                 stringBuilder.AppendFormat("<li class='{0}'>", i == CurrentPage ? "page-item active" : "page-item");
-                stringBuilder.AppendFormat("<a class='page-link' href = '/Product/List?categoryId={0}&page={1}'>{2}</a>", CategoryId, i, i);
+                stringBuilder.AppendFormat("<a class='page-link' href = '?categoryId={0}&page={1}'>{2}</a>", CategoryId, i, i);
                 stringBuilder.Append("</li>");
             }
             output.Content.SetHtmlContent(stringBuilder.ToString());

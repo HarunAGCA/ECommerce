@@ -1,0 +1,163 @@
+﻿@model Agca.ECommerce.CoreMvcWebUI.Models.OrderViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card border-info mb-3">
+    <div class="card-header text-dark" style="font-size :20pt">Order Items</div>
+    <div class="card-body text-dark">
+
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th class="text-left">
+                        Product Name
+                    </th>
+                    <th>
+                        Product Quantity
+                    </th>
+                    <th>
+                        Product Unit Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                    <tr>
+                        <td class="text-left">
+                            @item.Product.Name
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Product.UnitPrice
+                        </td>
+                    </tr>
+
+                }
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="font-weight-light">
+                        <span class="font-weight-bold">
+                            Total :
+                        </span>
+                        @Model.Order.TotalPrice <i class="fa fa-turkish-lira"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="card border-warning mb-3">
+    <div class="card-header text-dark" style="font-size : 20pt">Shipping Informations</div>
+    <div class="card-body text-dark">
+
+        <h5 class="card-title font-italic">Customer First Name</h5>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverFirstName</p>
+        <hr />
+        <h5 class="card-title font-italic">Customer Last Name</h5>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverLastName</p>
+        <hr />
+        <h5 class="card-title font-italic">Customer Turkish Id</h5>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverTurkishIdNo</p>
+        <hr />
+        <h5 class="card-title font-italic">E Mail</h5>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverEMail</p>
+        <hr />
+        <h5 class="card-title font-italic">Phone Number</h5>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverPhoneNumber</p>
+        <hr />
+        <h5 class="card-title font-italic">Shipping Address</h5>
+        <p class="card-text font-weight-light">@Model.Shipment.ReceiverAddress</p>
+    </div>
+</div>
+
+
+
+<div class="card border-success mb-3">
+    <div class="card-header text-dark" style="font-size :20pt">Billing</div>
+    <div class="card-body text-dark">
+
+        <div class="row font-weight-light">
+            <div class="col-md-8 text-left">
+                <p>Turkish ID : @Model.Shipment.ReceiverTurkishIdNo</p>
+                <p>First Name : @Model.Shipment.ReceiverFirstName</p>
+                <p>Last Name : @Model.Shipment.ReceiverLastName</p>
+                
+            </div>
+
+            <div class="col-md-4 text-left">
+                <p>Phone Number : @Model.Shipment.ReceiverPhoneNumber</p>
+                <p>E-Mail : @Model.Shipment.ReceiverEMail</p>
+                <p>Address : @Model.Shipment.ReceiverAddress</p>
+            </div>
+
+        </div>
+
+        <hr />
+        <table class="table text-center font-weight-light">
+            <thead>
+                <tr>
+                    <th class="text-left">
+                        Product Name
+                    </th>
+                    <th>
+                        Product Quantity
+                    </th>
+                    <th>
+                        Product Unit Price
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderItems)
+                {
+                <tr>
+                    <td class="text-left">
+                        @item.Product.Name
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    <td>
+                        @item.Product.UnitPrice
+                    </td>
+                    <td>
+                        @(item.Quantity*item.Product.UnitPrice)
+                    </td>
+                </tr>
+
+                }
+            <tr>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                    <span>
+                        Total :
+                    </span>
+                    @Model.Order.TotalPrice <i class="fa fa-turkish-lira"></i>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<a class="btn bg-success" asp-action="Summary" asp-controller="Order" asp-method="post"><span class="text-white">Ok</span></a>

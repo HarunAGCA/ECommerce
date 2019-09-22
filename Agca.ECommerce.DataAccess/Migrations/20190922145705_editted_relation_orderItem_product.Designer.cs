@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agca.ECommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    [Migration("20190919135204_initalCreate")]
-    partial class initalCreate
+    [Migration("20190922145705_editted_relation_orderItem_product")]
+    partial class editted_relation_orderItem_product
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

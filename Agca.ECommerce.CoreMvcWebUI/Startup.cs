@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.Business.Concrete;
+using Agca.ECommerce.CoreMvcWebUI.Entities;
 using Agca.ECommerce.CoreMvcWebUI.Middlewares;
 using Agca.ECommerce.CoreMvcWebUI.Models;
 using Agca.ECommerce.CoreMvcWebUI.Services;
 using Agca.ECommerce.CoreMvcWebUI.ValidationRules.FluentValidation;
+using Agca.ECommerce.CoreMvcWebUI.ValidationRules.FluentValidation.Entities;
 using Agca.ECommerce.DataAccess.Abstract;
 using Agca.ECommerce.DataAccess.Concrete.EntityFramework;
 using Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts;
@@ -17,6 +19,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
@@ -50,8 +53,19 @@ namespace Agca.ECommerce.CoreMvcWebUI
             services.AddScoped<IOrderViewModelSessionService, OrderViewModelSessionService>();
             services.AddTransient<IValidator<ShippingDetailsViewModel>, ShippingDetailsViewModelValidator>();
             services.AddTransient<IValidator<PaymentViewModel>, PaymentViewModelValidator>();
+            services.AddTransient<IValidator<AddProductViewModel>, AddProductViewModelValidator>();
+            services.AddTransient<IValidator<UpdateProductViewModel>, UpdateProductViewModelValidator>();
+            services.AddTransient<IValidator<LoginViewModel>,LoginViewModelValidator>();
+            services.AddTransient<IValidator<RegisterViewModel>, RegisterViewModelValidator>();
+            services.AddTransient<IValidator<Product>, ProductValidator>();
+            services.AddTransient<IValidator<Shipment>, ShipmentValidator>();
+            services.AddTransient<IValidator<Payment>, PaymentValidator>();
             services.AddSession();
             services.AddDistributedMemoryCache();
+            services.AddDbContext<CustomIdentityDbContext>(options => options.UseSqlServer("server=.;database=ECommerceIdentity;trusted_connection=true;"));
+            services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
+                .AddEntityFrameworkStores<CustomIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
 
         }
@@ -66,6 +80,7 @@ namespace Agca.ECommerce.CoreMvcWebUI
 
             app.UseFileServer();
             app.UseNodeModules(env.ContentRootPath);
+            app.UseAuthentication();
             app.UseSession();
             app.UseMvcWithDefaultRoute();
         }

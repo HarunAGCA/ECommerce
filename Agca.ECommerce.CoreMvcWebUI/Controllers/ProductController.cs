@@ -32,7 +32,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         #region Methods
         public IActionResult List(int categoryId = 0, int page = 1)
         {
-
+            //TODO Will do assigment to customer's Id when user login.
             if (_customerSessionService.GetCustomer() == null)
             {
                 _customerSessionService.SetCustomer(new Customer { Id = 1 });
