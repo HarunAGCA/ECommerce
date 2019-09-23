@@ -11,7 +11,6 @@
             <th>Product Name</th>
             <th>Unit Price</th>
             <th>Units In Stock</th>
-            <th>Category Id</th>
             <th></th>
             <th></th>
 
@@ -24,7 +23,6 @@
             <td>@product.Name</td>
             <td>@product.UnitPrice</td>
             <td>@product.UnitsInStock</td>
-            <td>@product.CategoryId</td>
             <td><a class="btn btn-xs btn-info" asp-controller="Admin" asp-action="UpdateProduct" asp-route-productId="@product.Id"><i class="fa fa-edit text-light"></i> Update</a></td>
             <td><a class="btn btn-xs btn-danger" asp-controller="Admin" asp-action="DeleteProduct" asp-route-productId="@product.Id"><i class="fa fa-remove text-light"></i> Delete</a></td>
         </tr>

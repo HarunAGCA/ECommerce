@@ -9,7 +9,6 @@
                     <th>Product Name</th>
                     <th>Unit Price</th>
                     <th>Units In Stock</th>
-                    <th>Category Id</th>
                     <th></th>
 
                 </tr >
@@ -21,7 +20,6 @@
                         <td>@product.Name</td>
                         <td>@product.UnitPrice</td>
                         <td>@product.UnitsInStock</td>
-                        <td>@product.CategoryId</td>
                         <td><a class="btn btn-xs btn-warning" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.Id"><i class="fa fa-shopping-cart text-light"></i> Add to cart</a></td>
                     </tr>
                 }
