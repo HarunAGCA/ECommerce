@@ -18,6 +18,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         private IOrderViewModelSessionService _orderViewModelSessionService;
         private IPaymentService _paymentService;
         private IProductService _productService;
+        private ICustomerSessionService _customerSessionService;
         #endregion
 
         #region Ctor
@@ -28,7 +29,8 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             IOrderItemService orderItemService,
             IOrderViewModelSessionService orderViewModelSessionService,
             IPaymentService paymentService,
-            IProductService productService
+            IProductService productService,
+            ICustomerSessionService customerSessionService
             )
         {
             _cartSessionService = cartSessionService;
@@ -38,6 +40,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             _orderViewModelSessionService = orderViewModelSessionService;
             _paymentService = paymentService;
             _productService = productService;
+            _customerSessionService = customerSessionService;
         }
         #endregion
 
@@ -59,7 +62,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             }
 
             var orderViewModelSession = _orderViewModelSessionService.GetOrderViewModel();
-            Order order = new Order { CustomerId = 1 , TotalPrice = orderViewModelSession.OrderItems.Sum(oi=>oi.Product.UnitPrice*oi.Quantity)};
+            Order order = new Order { CustomerId = _customerSessionService.GetCustomer().Id , TotalPrice = orderViewModelSession.OrderItems.Sum(oi=>oi.Product.UnitPrice*oi.Quantity)};
             _orderService.Add(order);
             orderViewModelSession.Order = order;
             orderViewModelSession.Shipment.OrderId = order.Id;

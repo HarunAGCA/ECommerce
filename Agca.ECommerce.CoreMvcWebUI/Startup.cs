@@ -51,7 +51,9 @@ namespace Agca.ECommerce.CoreMvcWebUI
             services.AddScoped<IPaymentService, PaymentManager>();
             services.AddScoped<IPaymentDal, EfPaymentDal>();
             services.AddSingleton<ICartSessionService, CartSessionService>();
-            services.AddSingleton<ICustomerSessionService, CustomerSessionService>();
+            services.AddSingleton<ICustomerDal, EfCustomerDal>();
+            services.AddScoped<ICustomerSessionService, CustomerSessionService>();
+            services.AddSingleton<ICustomerService, CustomerManager>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IOrderViewModelSessionService, OrderViewModelSessionService>();
             services.AddTransient<IValidator<ShippingDetailsViewModel>, ShippingDetailsViewModelValidator>();

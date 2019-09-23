@@ -8,5 +8,6 @@ namespace Agca.ECommerce.CoreMvcWebUI.Entities
 {
     public class CustomIdentityUser :IdentityUser
     {
+        public int CustomerId { get; set; }
     }
 }

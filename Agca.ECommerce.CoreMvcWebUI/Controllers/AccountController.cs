@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.CoreMvcWebUI.Entities;
 using Agca.ECommerce.CoreMvcWebUI.Models;
+using Agca.ECommerce.CoreMvcWebUI.Services;
+using Agca.ECommerce.Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
@@ -16,17 +19,23 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         UserManager<CustomIdentityUser> _userManager;
         RoleManager<CustomIdentityRole> _roleManager;
         SignInManager<CustomIdentityUser> _signInManager;
+        private ICustomerService _customerService;
+        private ICustomerSessionService _customerSessionService;
         #endregion
 
         #region Ctor
         public AccountController(
             UserManager<CustomIdentityUser> userManager,
             RoleManager<CustomIdentityRole> roleManager,
-            SignInManager<CustomIdentityUser> signInManager)
+            SignInManager<CustomIdentityUser> signInManager,
+            ICustomerSessionService customerSessionService,
+            ICustomerService customerService)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _customerSessionService = customerSessionService;
+            _customerService = customerService;
         }
         #endregion
 
@@ -42,10 +51,15 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+                Customer customer = new Customer();
+                _customerService.Add(customer);
+                int customerId = customer.Id;
+
                 CustomIdentityUser customIdentityUser = new CustomIdentityUser
                 {
                     Email = registerViewModel.EMail,
                     UserName = registerViewModel.UserName,
+
                 };
 
                 IdentityResult identityResult = _userManager.CreateAsync(customIdentityUser, registerViewModel.Password).Result;
@@ -81,6 +95,8 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
                     }
 
                     _userManager.AddToRoleAsync(customIdentityUser, customIdentityRole.Name).Wait();
+                    customIdentityUser.CustomerId = customerId;
+                    _userManager.UpdateAsync(customIdentityUser);
                     return RedirectToAction("Login", "Account");
                 }
                 else
@@ -115,6 +131,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
                 if (result.Succeeded)
                 {
                     CustomIdentityUser user = await _userManager.FindByNameAsync(loginViewModel.UserName);
+                    _customerSessionService.SetCustomer(new Customer { Id = user.CustomerId});
 
                     if (_userManager.IsInRoleAsync(user, "Admin").Result)
                     {
@@ -143,7 +160,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 
         #endregion
 
-
+        #region HelperMethods
         private string CheckError(IdentityResult result)
         {
             string errorString = "";
@@ -153,6 +170,6 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             }
             return errorString;
         }
-
+        #endregion
     }
 }
