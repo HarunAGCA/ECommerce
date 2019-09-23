@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 {
+
     public class ProductController : Controller
     {
         #region Fields

@@ -1,0 +1,19 @@
+﻿@model  Agca.ECommerce.CoreMvcWebUI.Models.AddCategoryViewModel
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>AddCategory</h1>
+
+<form asp-controller="Admin" asp-action="AddCategory" method="post" class="was-validated">
+
+    <div class="form-group">
+        <label asp-for="@Model.Category.Name">Category Name</label>
+        <input asp-for="@Model.Category.Name" class="form-control" placeholder="Category Name" />
+        <span asp-validation-for="@Model.Category.Name" style="color:red"></span>
+    </div>
+    <input type="submit" value="Add" class="btn btn-success" />
+
+</form>
+

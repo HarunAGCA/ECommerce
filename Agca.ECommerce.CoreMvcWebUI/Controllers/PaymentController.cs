@@ -6,10 +6,12 @@ using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.CoreMvcWebUI.Models;
 using Agca.ECommerce.CoreMvcWebUI.Services;
 using Agca.ECommerce.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 {
+    [Authorize(Roles = "User")]
     public class PaymentController : Controller
     {
         #region Fields

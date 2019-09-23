@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.CoreMvcWebUI.Models;
 using Agca.ECommerce.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         #region Fields
@@ -27,6 +29,11 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         #endregion
 
         #region Methods
+        public IActionResult Index()
+        {
+            return RedirectToAction("ListProducts","Admin");
+        }
+
         public IActionResult ListProducts(int categoryId = 0, int page = 1)
         {
 
@@ -114,6 +121,64 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             return RedirectToAction("ListProducts", "Admin");
         }
 
+        public IActionResult AddCategory()
+        {
+            AddCategoryViewModel addCategoryViewModel = new AddCategoryViewModel
+            {
+                Category = new Category()
+            };
+            return View(addCategoryViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddCategory(AddCategoryViewModel addCategoryViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(addCategoryViewModel);
+            }
+            Category category = new Category { Name = addCategoryViewModel.Category.Name };
+            _categoryService.Add(category);
+            TempData["message"] = "The category has been added.";
+            return RedirectToAction("ListProducts", "Admin");
+        }
+
+        public IActionResult UpdateCategory(int categoryId)
+        {
+            UpdateCategoryViewModel model = new UpdateCategoryViewModel
+            {
+
+                Category = _categoryService.Get(categoryId)
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCategory(UpdateCategoryViewModel updateCategoryViewModel)
+        {
+
+            var category = updateCategoryViewModel.Category;
+
+            if (!ModelState.IsValid)
+            {
+                TempData["message"] = "The category could not be updated. Please check values that is entry.";
+                return RedirectToAction("UpdateCategory", "Admin", new { categoryId = category.Id });
+
+            }
+
+            _categoryService.Update(category);
+            TempData["message"] = "The category has been successfully updated.";
+            return RedirectToAction("ListProducts", "Admin");
+        }
+
+        public IActionResult DeleteCategory(int categoryId)
+        {
+            var categoryName = _categoryService.Get(categoryId).Name;
+            _categoryService.Delete(categoryId);
+            TempData["message"] = String.Format("{0} has been successfully deleted.", categoryName);
+            return RedirectToAction("ListProducts", "Admin");
+        }
 
         #endregion
     }

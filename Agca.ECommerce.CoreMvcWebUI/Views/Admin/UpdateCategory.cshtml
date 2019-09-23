@@ -1,0 +1,23 @@
+﻿@model Agca.ECommerce.CoreMvcWebUI.Models.UpdateCategoryViewModel
+@{
+    ViewData["Title"] = "UpdateCategory";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>UpdateCategory</h1>
+
+
+<form asp-controller="Admin" asp-action="UpdateCategory" method="post" class="was-validated">
+
+    <div class="form-group">
+        <label asp-for="@Model.Category.Name">Category Name</label>
+        <input asp-for="@Model.Category.Name" class="form-control" placeholder="Category Name" />
+        <span asp-validation-for="@Model.Category.Name" style="color:red"></span>
+    </div>
+
+    <input type="hidden" asp-for="@Model.Category.Id" />
+    <input type="submit" value="Update" class="btn btn-success" />
+
+
+
+</form>

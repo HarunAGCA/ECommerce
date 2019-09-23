@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.Business.Concrete;
@@ -16,12 +17,14 @@ using Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts;
 using Agca.ECommerce.Entities.Concrete;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -55,8 +58,9 @@ namespace Agca.ECommerce.CoreMvcWebUI
             services.AddTransient<IValidator<PaymentViewModel>, PaymentViewModelValidator>();
             services.AddTransient<IValidator<AddProductViewModel>, AddProductViewModelValidator>();
             services.AddTransient<IValidator<UpdateProductViewModel>, UpdateProductViewModelValidator>();
-            services.AddTransient<IValidator<LoginViewModel>,LoginViewModelValidator>();
+            services.AddTransient<IValidator<LoginViewModel>, LoginViewModelValidator>();
             services.AddTransient<IValidator<RegisterViewModel>, RegisterViewModelValidator>();
+            services.AddTransient<IValidator<AddCategoryViewModel>, AddCategoryViewModelValidator>();
             services.AddTransient<IValidator<Product>, ProductValidator>();
             services.AddTransient<IValidator<Shipment>, ShipmentValidator>();
             services.AddTransient<IValidator<Payment>, PaymentValidator>();
@@ -81,8 +85,30 @@ namespace Agca.ECommerce.CoreMvcWebUI
             app.UseFileServer();
             app.UseNodeModules(env.ContentRootPath);
             app.UseAuthentication();
+            app.UseStatusCodePages(async context =>
+            {
+                var response = context.HttpContext.Response;
+
+                if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
+                {
+                    response.Redirect("/Account/Login?statusCode=401");
+                }
+                else if (response.StatusCode == (int)HttpStatusCode.Forbidden)
+                {
+                    response.Redirect("/Account/Login&statusCode=403");
+                }
+
+
+
+            });
             app.UseSession();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(ConfigureRoutes);
+        }
+
+        private void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapRoute("Default", "{Controller=Product}/{Action=List}/{Id?}");
+
         }
     }
 }

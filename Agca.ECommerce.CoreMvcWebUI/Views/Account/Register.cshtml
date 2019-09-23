@@ -1,0 +1,84 @@
+﻿@using System.Threading.Tasks
+@model Agca.ECommerce.CoreMvcWebUI.Models.RegisterViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href="/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <script src="~/node_modules/jquery/dist/jquery.js"></script>
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+
+
+    <div class="row justify-content-center" style="padding:120px">
+        <div id="signupbox" style="margin-top:50px;" class="mainbox col-md-5">
+            <div class="card card-info">
+                <div class="card-header">
+                    <div class="card-title">Sign Up</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a asp-controller="Account" asp-action="Login">Sign In</a></div>
+                </div>
+                @if (!String.IsNullOrEmpty((string)TempData["registerMessage"]))
+                {
+                    <div class="alert alert-danger col-md-12">@TempData["registerMessage"]</div>
+                }
+
+
+
+                <div class="card-body">
+                    <form asp-controller="Account" asp-action="Register" method="post" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label asp-for="EMail" class="col-md-3 control-label"></label>
+                            <div class="col-md-9 input-group">
+                                <span class="input-group-prepend input-group-text">@@</span>
+                                <input asp-for="EMail" class="form-control" placeholder="Email Address">
+                                <span asp-validation-for="EMail"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="UserName" class="col-md-3 control-label"></label>
+                            <div class="col-md-9 input-group">
+                                <span class="input-group-prepend input-group-text"><i class="fa fa-user"></i></span>
+                                <input asp-for="UserName" type="text" class="form-control" placeholder="User Name">
+                                <span asp-validation-for="UserName"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password" class="col-md-3 control-label"></label>
+                            <div class="col-md-9 input-group">
+                                <span class="input-group-prepend input-group-text"><i class="fa fa-lock"></i></span>
+                                <input asp-for="Password" class="form-control" placeholder="Password">
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <!-- Button -->
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" class="btn btn-info" value="Register"><i class="icon-hand-right"></i>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

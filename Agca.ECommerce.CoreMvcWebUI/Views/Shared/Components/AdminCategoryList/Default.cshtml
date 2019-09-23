@@ -10,7 +10,21 @@
             {
                 cssClass += " active";
             }
-            <a href="/Admin/ListProducts?categoryId=@category.Id" class="@cssClass">@category.Name</a>
+    <div class=@cssClass>
+        <div class="row col-md-12">
+            <div class="col-md-9 text-left">
+                <a href="/Admin/ListProducts?categoryId=@category.Id">@category.Name</a>
+            </div>
+            <div class="col-md-1 text-right">
+                <a href="/Admin/UpdateCategory?categoryId=@category.Id"><i class="fa fa-edit fa-2x"></i></a>
+            </div>
+            <div class="col-md-1  text-right">
+                <a href="/Admin/DeleteCategory?categoryId=@category.Id" ><i class="fa fa-remove fa-2x"></i></a>
+            </div>
+        </div>  
+    </div>
+            
         }
+        <a href="/Admin/AddCategory" class="list-group-item bg-light text-success" style="font-size:14pt; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; border:dashed;"><i class="fa fa-plus "></i>Add a new category</a>
     </div>
 

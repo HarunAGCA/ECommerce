@@ -14,7 +14,6 @@ namespace Agca.ECommerce.CoreMvcWebUI.ValidationRules.FluentValidation
             RuleFor(p => p.UserName).NotEmpty().MinimumLength(5);
             RuleFor(p => p.EMail).NotEmpty().EmailAddress();
             RuleFor(p => p.Password).NotEmpty();
-            RuleFor(p => p.ConfirmPassword).NotEmpty();
         }
     }
 }

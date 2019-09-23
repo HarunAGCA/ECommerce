@@ -16,9 +16,29 @@ namespace Agca.ECommerce.Business.Concrete
             _categoryDal = categoryDal;
         }
 
+        public void Add(Category category)
+        {
+            _categoryDal.Add(category);
+        }
+
+        public void Delete(int categoryId)
+        {
+            _categoryDal.Delete(new Category { Id = categoryId });
+        }
+
+        public Category Get(int categoryId)
+        {
+            return _categoryDal.Get(c => c.Id == categoryId);
+        }
+
         public List<Category> GetAll()
         {
            return _categoryDal.GetList(null);
+        }
+
+        public void Update(Category category)
+        {
+            _categoryDal.Update(category);
         }
     }
 }
