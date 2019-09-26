@@ -39,7 +39,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
                 _customerSessionService.SetCustomer(new Customer { Id = 1 });
             };
 
-            List<Product> products = _productService.GetByCategory(categoryId);
+            List<Product> products = _productService.GetAllWithRelatedEntitiesByCategory(categoryId);
             ProductListViewModel productListViewModel = new ProductListViewModel
             {
                 Products = products.Skip(PageSize * (page - 1)).Take(PageSize).ToList(),

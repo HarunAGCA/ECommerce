@@ -40,7 +40,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         #region Methods
         public IActionResult AddToCart(int productId)
         {
-            Product productToBeAdded = _productService.Get(productId);
+            Product productToBeAdded = _productService.GetWithPhotos(productId);
 
             Cart cart = _cartSessionService.GetCart();
 

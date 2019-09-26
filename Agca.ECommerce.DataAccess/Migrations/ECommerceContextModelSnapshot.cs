@@ -98,6 +98,29 @@ namespace Agca.ECommerce.DataAccess.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Photo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsMain");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int?>("ProductId1");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ProductId1");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -186,6 +209,18 @@ namespace Agca.ECommerce.DataAccess.Migrations
                         .WithOne("Payment")
                         .HasForeignKey("Agca.ECommerce.Entities.Concrete.Payment", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Photo", b =>
+                {
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Product")
+                        .WithMany("Photos")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Product", b =>

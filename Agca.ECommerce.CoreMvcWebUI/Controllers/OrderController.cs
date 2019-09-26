@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.CoreMvcWebUI.Services;
+using Agca.ECommerce.Entities;
 using Agca.ECommerce.Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -62,23 +64,42 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             }
 
             var orderViewModelSession = _orderViewModelSessionService.GetOrderViewModel();
-            Order order = new Order { CustomerId = _customerSessionService.GetCustomer().Id , TotalPrice = orderViewModelSession.OrderItems.Sum(oi=>oi.Product.UnitPrice*oi.Quantity)};
-            _orderService.Add(order);
-            orderViewModelSession.Order = order;
-            orderViewModelSession.Shipment.OrderId = order.Id;
-            orderViewModelSession.Payment.OrderId = order.Id;
-            orderViewModelSession.Payment.AmountOfPayment = order.TotalPrice;
-            foreach (var orderItem in orderViewModelSession.OrderItems)
+
+            List<OrderItem> orderItems = new List<OrderItem>();
+
+            foreach (var item in orderViewModelSession.OrderItems)
             {
-                orderItem.OrderId = order.Id;
+                OrderItem orderItem = new OrderItem();
+                orderItem.Order = item.Order;
+                orderItem.OrderId = item.OrderId;
+                orderItem.Product = item.Product;
+                orderItem.ProductId = item.ProductId;
+                orderItem.Quantity = item.Quantity;
+
+                orderItems.Add(orderItem);
             }
 
-            _shipmentService.Add(orderViewModelSession.Shipment);
-            _paymentService.Add(orderViewModelSession.Payment);
-            foreach (var orderItem in orderViewModelSession.OrderItems)
+            Order order = new Order
             {
-                _orderItemService.Add(orderItem);
-                
+                CustomerId = _customerSessionService.GetCustomer().Id,
+                Shipment = orderViewModelSession.Shipment,
+                Payment = orderViewModelSession.Payment,
+                OrderItems = orderItems,
+                TotalPrice = orderViewModelSession.OrderItems.Sum(oi => oi.Product.UnitPrice * oi.Quantity)
+
+            };
+
+            orderViewModelSession.Order = order;
+            
+            foreach (var orderItem in order.OrderItems)
+            {
+                orderItem.Product = null;
+            }
+            
+            _orderService.Add(order);
+
+            foreach (var orderItem in orderViewModelSession.OrderItems)
+            {               
                 //Stock decrement
                 var product = _productService.Get(orderItem.ProductId);
                 product.UnitsInStock -= orderItem.Quantity;
@@ -86,14 +107,15 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 
             }
 
-            _cartSessionService.SetCart(new Cart());
-            _orderViewModelSessionService.SetOrderViewModel(null);
+
             TempData["message"] = "Your order has been received. You can see order summary on below.";
             return View(orderViewModelSession);
         }
 
         public IActionResult Confirm()
         {
+            _cartSessionService.SetCart(new Cart());
+            _orderViewModelSessionService.SetOrderViewModel(null);
             return RedirectToAction("list", "product");
         }
         #endregion

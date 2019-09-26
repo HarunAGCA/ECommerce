@@ -6,11 +6,11 @@
 
 <h1>AddProduct</h1>
 
-<form asp-controller="Admin" asp-action="AddProduct" method="post" class="was-validated">
+<form enctype="multipart/form-data" asp-controller="Admin" asp-action="AddProduct" method="post" class="was-validated">
 
     <div class="form-group">
         <label asp-for="@Model.Product.Name">Product Name</label>
-        <input asp-for="@Model.Product.Name" class="form-control" placeholder="Product Name"/>
+        <input asp-for="@Model.Product.Name" class="form-control" placeholder="Product Name" />
         <span asp-validation-for="@Model.Product.Name" style="color:red"></span>
     </div>
 
@@ -31,6 +31,12 @@
         <select asp-for="@Model.Product.CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories,"Id","Name"))"></select>
         <span asp-validation-for="@Model.Product.CategoryId" style="color:red"></span>
     </div>
+
+    <div class="form-group">
+        <input asp-for=@Model.Photos type="file" class="form-control" multiple />
+        <span asp-validation-for=@Model.Photos style="color:red"></span>
+    </div>
+
 
     <input type="submit" value="Add" class="btn btn-success" />
 

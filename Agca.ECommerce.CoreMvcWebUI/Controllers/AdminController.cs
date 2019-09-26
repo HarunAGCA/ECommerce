@@ -1,43 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Agca.ECommerce.Business.Abstract;
 using Agca.ECommerce.CoreMvcWebUI.Models;
 using Agca.ECommerce.Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         #region Fields
         private IProductService _productService;
         private ICategoryService _categoryService;
         private const int PageSize = 10;
+        private IHostingEnvironment _hostingEnvironment;
 
         #endregion
 
         #region Ctor
-        public AdminController(IProductService productService, ICategoryService categoryService)
+        public AdminController(
+            IProductService productService,
+            ICategoryService categoryService,
+            IHostingEnvironment hostingEnvironment)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _hostingEnvironment = hostingEnvironment;
         }
         #endregion
 
         #region Methods
         public IActionResult Index()
         {
-            return RedirectToAction("ListProducts","Admin");
+            return RedirectToAction("ListProducts", "Admin");
         }
 
         public IActionResult ListProducts(int categoryId = 0, int page = 1)
         {
 
-            List<Product> products = _productService.GetByCategory(categoryId);
+            List<Product> products = _productService.GetAllWithRelatedEntitiesByCategory(categoryId);
             ProductListViewModel productListViewModel = new ProductListViewModel
             {
                 Products = products.Skip(PageSize * (page - 1)).Take(PageSize).ToList(),
@@ -53,10 +62,11 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 
         public IActionResult AddProduct()
         {
+
             AddProductViewModel model = new AddProductViewModel
             {
                 Product = new Product(),
-                Categories = _categoryService.GetAll()
+                Categories = _categoryService.GetAll()               
             };
 
             return View(model);
@@ -66,15 +76,33 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         public IActionResult AddProduct(AddProductViewModel addProductViewModel)
         {
 
-            var product = addProductViewModel.Product;
-
             if (!ModelState.IsValid)
             {
-
                 TempData["message"] = "The product could not be added. Please check values that is entry.";
             }
             else
             {
+                Product product = addProductViewModel.Product;
+                //TODO will be refactored
+                string rootPath = _hostingEnvironment.WebRootPath;
+                string uploadsFilePath;
+                string uniqueFileName;
+                bool isMain = true;
+                
+                if (addProductViewModel.Photos != null && addProductViewModel.Photos.Count > 0)
+                {
+                    foreach (IFormFile photo in addProductViewModel.Photos)
+                    {
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                        uploadsFilePath = "img";
+                        photo.CopyToAsync(new FileStream(Path.Combine(rootPath,uploadsFilePath,uniqueFileName), FileMode.Create));
+                        product.Photos.Add(new Photo { Url = Path.Combine(uploadsFilePath,uniqueFileName).ToString() , IsMain = isMain });
+                        isMain = false;
+                    }
+
+                }
+
+
                 _productService.Add(product);
                 TempData["message"] = String.Format("{0} has been successfully added to the products.", product.Name);
 
@@ -104,7 +132,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             if (!ModelState.IsValid)
             {
                 TempData["message"] = "The product could not be updated. Please check values that is entry.";
-                return RedirectToAction("UpdateProduct", "Admin",new { productId=product.Id});
+                return RedirectToAction("UpdateProduct", "Admin", new { productId = product.Id });
 
             }
 

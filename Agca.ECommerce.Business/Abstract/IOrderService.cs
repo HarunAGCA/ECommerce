@@ -9,7 +9,9 @@ namespace Agca.ECommerce.Business.Abstract
     {
         Order Get(int orderId);
         void Add(Order order);
-        
+
+        Order GetWithRelatedEntities(int orderId);
+        List<Order> GetAllWithRelatedEntities();
 
     }
 }

@@ -17,8 +17,8 @@ namespace Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>()
-                .HasMany(c=>c.Products)
-                .WithOne(p=>p.Category);
+                .HasMany(c => c.Products)
+                .WithOne(p => p.Category);
 
 
             modelBuilder.Entity<Order>()
@@ -40,7 +40,10 @@ namespace Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.Product);
 
-
+            modelBuilder.Entity<Product>()
+                .HasMany(ph => ph.Photos)
+                .WithOne()
+                .HasForeignKey(ph => ph.ProductId);
         }
 
         public DbSet<Product> Products { get; set; }
@@ -50,6 +53,7 @@ namespace Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Photo> Photos { get; set; }
 
 
 

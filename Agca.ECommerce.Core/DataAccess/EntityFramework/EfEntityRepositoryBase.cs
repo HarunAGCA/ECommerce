@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Agca.ECommerce.Core.Entities;
+using Agca.ECommerce.DataAccess.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Agca.ECommerce.Core.DataAccess.EntityFramework
@@ -18,8 +19,7 @@ namespace Agca.ECommerce.Core.DataAccess.EntityFramework
         {
             using (var context = new TContext())
             {
-                var AddedEntity = context.Entry(entity);
-                AddedEntity.State = EntityState.Added;
+                context.Add<TEntity>(entity);
                 context.SaveChanges();
             }
         }
@@ -28,8 +28,8 @@ namespace Agca.ECommerce.Core.DataAccess.EntityFramework
         {
             using (var context = new TContext())
             {
-                var DeletedEntity = context.Entry(entity);
-                DeletedEntity.State = EntityState.Deleted;
+
+                context.Remove<TEntity>(entity);
                 context.SaveChanges();
             }
         }
@@ -41,8 +41,6 @@ namespace Agca.ECommerce.Core.DataAccess.EntityFramework
                 return context.Set<TEntity>().SingleOrDefault(filter);
             }
         }
-
-
 
         public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
@@ -58,11 +56,27 @@ namespace Agca.ECommerce.Core.DataAccess.EntityFramework
         {
             using (var context = new TContext())
             {
-                var UpdatedEntity = context.Entry(entity);
-                UpdatedEntity.State = EntityState.Modified;
+                context.Update<TEntity>(entity);
                 context.SaveChanges();
             }
         }
+
+
+        public IEnumerable<TEntity> GetWithAllNavigations(Expression<Func<TEntity, bool>> predicate = null)
+        {
+
+            using (var context = new TContext())
+            {
+                var query = context.Set<TEntity>()
+                 .Include(context.GetIncludePaths(typeof(TEntity)));
+                if (predicate != null)
+                    query = query.Where(predicate);
+                return query.ToList();
+            }
+
+            
+        }
+
     }
 
 }
