@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href="/node_modules/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+    <div>
+        @await Html.PartialAsync("~/Views/_LayoutHeaderPartial.cshtml")
+    </div>
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <div class="my-5">
+        @await Html.PartialAsync("~/Views/_LayoutFooterPartial.cshtml")
+    </div>
+</body>
+</html>

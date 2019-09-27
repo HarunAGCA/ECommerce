@@ -83,15 +83,27 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
                     }
                     else
                     {
-                        customIdentityRole = new CustomIdentityRole { Name = "User" };
-                        IdentityResult roleIdentityResult = _roleManager.CreateAsync(customIdentityRole).Result;
-                        if (!roleIdentityResult.Succeeded)
+
+                        if (!_roleManager.Roles.Any(r => r.Name == "User"))
                         {
-                            ModelState.AddModelError("", "We can not add the role!");
-                            var errorMessage = CheckError(roleIdentityResult);
-                            TempData["registerMessage"] = errorMessage;
-                            return View(registerViewModel);
+                            customIdentityRole = new CustomIdentityRole { Name = "User" };
+                            IdentityResult roleIdentityResult = _roleManager.CreateAsync(customIdentityRole).Result;
+
+                            if (!roleIdentityResult.Succeeded)
+                            {
+                                ModelState.AddModelError("", "We can not add the role!");
+                                var errorMessage = CheckError(roleIdentityResult);
+                                TempData["registerMessage"] = errorMessage;
+                                return View(registerViewModel);
+                            }
                         }
+                        else
+                        {
+                            customIdentityRole = _roleManager.Roles.FirstOrDefault(r => r.Name == "User");
+                        }
+
+                        customIdentityUser.CustomerId = customerId;
+
                     }
 
                     _userManager.AddToRoleAsync(customIdentityUser, customIdentityRole.Name).Wait();
@@ -111,12 +123,26 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
 
         public IActionResult Login(string returnUrl)
 
-        {           
-            if (!String.IsNullOrEmpty(returnUrl))
-            {          
-                    TempData["loginForbiddenMessage"] = "You do not have permission to perfom this action.";              
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (String.IsNullOrEmpty(returnUrl))
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListProducts", "Admin");
+                    }
+                    else if (User.IsInRole("User"))
+                    {
+                        return RedirectToAction("List", "Product");
+                    }
+                }
+                else
+                {
+                    TempData["loginForbiddenMessage"] = "You do not have permission to perfom this action.";
+                }
             }
-           
+
             return View();
         }
 
@@ -131,7 +157,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
                 if (result.Succeeded)
                 {
                     CustomIdentityUser user = await _userManager.FindByNameAsync(loginViewModel.UserName);
-                    _customerSessionService.SetCustomer(new Customer { Id = user.CustomerId});
+                    _customerSessionService.SetCustomer(new Customer { Id = user.CustomerId });
 
                     if (_userManager.IsInRoleAsync(user, "Admin").Result)
                     {
@@ -139,12 +165,14 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
                     }
                     else if (_userManager.IsInRoleAsync(user, "User").Result)
                     {
+                        _customerSessionService.SetCustomer(new Customer { Id = user.CustomerId });
+
                         return RedirectToAction("List", "Product");
                     }
                 }
                 else
                 {
-                    
+
                 }
 
                 ModelState.AddModelError("", "Invalid Login");
@@ -155,7 +183,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync().Wait();
-            return RedirectToAction("Login","Account");
+            return Redirect("/Product/List");
         }
 
         #endregion

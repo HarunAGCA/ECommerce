@@ -33,11 +33,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         #region Methods
         public IActionResult List(int categoryId = 0, int page = 1)
         {
-            //TODO Will do assigment to customer's Id when user login.
-            if (_customerSessionService.GetCustomer() == null)
-            {
-                _customerSessionService.SetCustomer(new Customer { Id = 1 });
-            };
+            
 
             List<Product> products = _productService.GetAllWithRelatedEntitiesByCategory(categoryId);
             ProductListViewModel productListViewModel = new ProductListViewModel
@@ -51,6 +47,14 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             };
 
             return View(productListViewModel);
+        }
+
+        public IActionResult Detail(int productId)
+        {
+            Product product = _productService.GetWithRelatedEntities(productId);
+            ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel();
+            productDetailViewModel.Product = product;
+            return View(productDetailViewModel);
         }
         #endregion
     }

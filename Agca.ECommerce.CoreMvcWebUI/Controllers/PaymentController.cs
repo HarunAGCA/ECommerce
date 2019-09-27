@@ -77,8 +77,8 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
                 CreditCardOwnerName = paymentViewModel.Payment.CreditCardOwnerName,
                 CreditCardExpiryDate = paymentViewModel.Payment.CreditCardExpiryDate,
                 CreditCardCVC = paymentViewModel.Payment.CreditCardCVC,
-                DateOfPayment = paymentViewModel.Payment.DateOfPayment,
-                //AmountOfPayment = orderViewModelSession.Order.TotalPrice,
+                AmountOfPayment = orderViewModelSession.OrderItems.Sum(oi=>oi.Product.UnitPrice*oi.Quantity),
+
                 //OrderId = orderViewModelSession.Order.Id              
             };
 

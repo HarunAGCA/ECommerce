@@ -87,22 +87,6 @@ namespace Agca.ECommerce.CoreMvcWebUI
             app.UseFileServer();
             app.UseNodeModules(env.ContentRootPath);
             app.UseAuthentication();
-            app.UseStatusCodePages(async context =>
-            {
-                var response = context.HttpContext.Response;
-
-                if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
-                {
-                    response.Redirect("/Account/Login?statusCode=401");
-                }
-                else if (response.StatusCode == (int)HttpStatusCode.Forbidden)
-                {
-                    response.Redirect("/Account/Login&statusCode=403");
-                }
-
-
-
-            });
             app.UseSession();
             app.UseMvc(ConfigureRoutes);
         }

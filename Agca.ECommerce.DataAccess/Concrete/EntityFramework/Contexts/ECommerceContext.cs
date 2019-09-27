@@ -29,6 +29,14 @@ namespace Agca.ECommerce.DataAccess.Concrete.EntityFramework.Contexts
                 .HasMany(c => c.Orders)
                 .WithOne(o => o.Customer);
 
+            modelBuilder.Entity<Customer>()
+                .Property(c => c.RegisterDate)
+                .HasDefaultValue(DateTime.Now);
+
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.DateOfPayment)
+                .HasDefaultValue(DateTime.Now);
+
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Payment)
                 .WithOne(p => p.Order);

@@ -49,3 +49,7 @@ D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\V
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Components\UserSummary\Default.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\AddCategory.g.cshtml.cs
 D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\UpdateCategory.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\Product\Detail.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\_Layout2.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\_LayoutFooterPartial.g.cshtml.cs
+D:\PROJECTS\WEB\Agca\Agca.ECommerce.CoreMvcWebUI\obj\Debug\netcoreapp2.2\Razor\Views\_LayoutHeaderPartial.g.cshtml.cs

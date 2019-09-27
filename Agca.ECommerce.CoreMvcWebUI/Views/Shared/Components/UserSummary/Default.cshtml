@@ -3,13 +3,27 @@
         <a class="nav-link dropdown-toggle" style="font-size:14pt" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Account
         </a>
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a style="color:blue; font-size:12pt">Welcome @Model.UserName</a>
 
-            <a style="color:blue; font-size:12pt">Welcome @Model.UserName</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/Account/Logout"><i class="fa fa-sign-out"></i> Logout </a>
+            </div>
+        }
+        else
+        {
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="/Account/Logout"><i class="fa fa-sign-out" ></i> Logout </a>
-        </div>
+                <a style="color:blue; font-size:12pt;">Welcome</a>
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/Account/Login"><i class="fa fa-sign-in"></i> Login </a>
+            </div>
+
+        }
+
     </li>
 
