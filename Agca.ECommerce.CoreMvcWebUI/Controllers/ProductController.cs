@@ -52,6 +52,10 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         public IActionResult Detail(int productId)
         {
             Product product = _productService.GetWithRelatedEntities(productId);
+            if (product == null)
+            {
+                return RedirectToAction("List","Product");
+            }
             ProductDetailViewModel productDetailViewModel = new ProductDetailViewModel();
             productDetailViewModel.Product = product;
             return View(productDetailViewModel);

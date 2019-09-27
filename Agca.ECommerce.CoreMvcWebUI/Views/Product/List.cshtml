@@ -13,27 +13,30 @@
                 <th>Unit Price</th>
                 <th>Units In Stock</th>
                 <th></th>
+                <th></th>
 
             </tr>
         </thead>
         <tbody>
             @foreach (var product in Model.Products)
             {
-                <tr>
-                    @if (product.Photos.Find(p => p.IsMain == true) != null)
-                    {
-                        <td><img src="~/@product.Photos.Find(p => p.IsMain == true).Url.ToString()" alt=@product.Name asp-append-version="true" width="100" height="100" /></td>
-                    }
-                    else
-                    {
-                        <td><img src="~/img/notFound.png" alt="Image not found" width="100" height="100" /></td>
-                    }
+            <tr>
+                @if (product.Photos.Find(p => p.IsMain == true) != null)
+                {
+                    <td><img src="~/@product.Photos.Find(p => p.IsMain == true).Url.ToString()" alt=@product.Name asp-append-version="true" width="100" height="100" /></td>
+                }
+                else
+                {
+                    <td><img src="~/img/notFound.png" alt="Image not found" width="100" height="100" /></td>
+                }
 
-                    <td>@product.Name</td>
-                    <td>@product.UnitPrice</td>
-                    <td>@product.UnitsInStock</td>
-                    <td><a class="btn btn-xs btn-warning" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.Id"><i class="fa fa-shopping-cart text-light"></i> Add to cart</a></td>
-                </tr>
+                <td>@product.Name</td>
+                <td>@product.UnitPrice</td>
+                <td>@product.UnitsInStock</td>
+                <td><a class="btn btn-xs btn-warning" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.Id"><i class="fa fa-shopping-cart text-light"></i> Add to cart</a></td>
+                <td><a class="btn btn-xs btn-warning" asp-controller="Product" asp-action="Detail" asp-route-productId="@product.Id"><i class="fa fa-search text-light"></i> Review</a></td>
+
+            </tr>
             }
         </tbody>
     </table>
