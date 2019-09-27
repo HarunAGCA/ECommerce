@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agca.ECommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    [Migration("20190925104820_photo_feature_test_")]
-    partial class photo_feature_test_
+    [Migration("20190927080738_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,15 +40,9 @@ namespace Agca.ECommerce.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("EMail");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("TurkishIdNo");
+                    b.Property<DateTime>("RegisterDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new DateTime(2019, 9, 27, 11, 7, 38, 680, DateTimeKind.Local).AddTicks(2702));
 
                     b.HasKey("Id");
 
@@ -88,7 +82,9 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.Property<string>("CreditCardOwnerName");
 
-                    b.Property<DateTime>("DateOfPayment");
+                    b.Property<DateTime>("DateOfPayment")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new DateTime(2019, 9, 27, 11, 7, 38, 681, DateTimeKind.Local).AddTicks(8709));
 
                     b.Property<int>("OrderId");
 
@@ -106,7 +102,11 @@ namespace Agca.ECommerce.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsMain");
+
                     b.Property<int>("ProductId");
+
+                    b.Property<int?>("ProductId1");
 
                     b.Property<string>("Url");
 
@@ -114,7 +114,9 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Photo");
+                    b.HasIndex("ProductId1");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Product", b =>
@@ -209,10 +211,14 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Photo", b =>
                 {
-                    b.HasOne("Agca.ECommerce.Entities.Concrete.Product", "Product")
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Product")
                         .WithMany("Photos")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Agca.ECommerce.Entities.Concrete.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId1");
                 });
 
             modelBuilder.Entity("Agca.ECommerce.Entities.Concrete.Product", b =>

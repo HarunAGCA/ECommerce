@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agca.ECommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ECommerceContext))]
-    [Migration("20190926100428_photo_feature_test_____")]
-    partial class photo_feature_test_____
+    [Migration("20190927082231_Initial_")]
+    partial class Initial_
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,15 +40,9 @@ namespace Agca.ECommerce.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("EMail");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("TurkishIdNo");
+                    b.Property<DateTime>("RegisterDate")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new DateTime(2019, 9, 27, 11, 22, 31, 53, DateTimeKind.Local).AddTicks(5871));
 
                     b.HasKey("Id");
 
@@ -88,7 +82,9 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.Property<string>("CreditCardOwnerName");
 
-                    b.Property<DateTime>("DateOfPayment");
+                    b.Property<DateTime>("DateOfPayment")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(new DateTime(2019, 9, 27, 11, 22, 31, 55, DateTimeKind.Local).AddTicks(4096));
 
                     b.Property<int>("OrderId");
 
@@ -130,6 +126,8 @@ namespace Agca.ECommerce.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CategoryId");
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 

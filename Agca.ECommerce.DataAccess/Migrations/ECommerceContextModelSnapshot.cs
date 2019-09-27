@@ -40,7 +40,7 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("GetDate()");
+                        .HasDefaultValue(new DateTime(2019, 9, 27, 11, 22, 31, 53, DateTimeKind.Local).AddTicks(5871));
 
                     b.HasKey("Id");
 
@@ -82,7 +82,7 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
                     b.Property<DateTime>("DateOfPayment")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("GetDate()");
+                        .HasDefaultValue(new DateTime(2019, 9, 27, 11, 22, 31, 55, DateTimeKind.Local).AddTicks(4096));
 
                     b.Property<int>("OrderId");
 
@@ -124,6 +124,8 @@ namespace Agca.ECommerce.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CategoryId");
+
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name");
 

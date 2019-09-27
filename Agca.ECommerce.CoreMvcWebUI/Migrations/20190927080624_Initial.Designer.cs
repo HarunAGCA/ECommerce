@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agca.ECommerce.CoreMvcWebUI.Migrations
 {
     [DbContext(typeof(CustomIdentityDbContext))]
-    [Migration("20190922204701_Identity")]
-    partial class Identity
+    [Migration("20190927080624_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,8 @@ namespace Agca.ECommerce.CoreMvcWebUI.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<int>("CustomerId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);

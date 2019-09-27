@@ -8,6 +8,7 @@ using Agca.ECommerce.CoreMvcWebUI.Services;
 using Agca.ECommerce.Entities;
 using Agca.ECommerce.Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agca.ECommerce.CoreMvcWebUI.Controllers
@@ -78,6 +79,7 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
         [Authorize(Roles = "User")]
         public IActionResult Complete()
         {
+
             var cart = _cartSessionService.GetCart();
 
             if (cart.CartLines.Count <= 0)

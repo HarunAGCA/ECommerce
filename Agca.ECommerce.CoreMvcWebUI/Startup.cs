@@ -72,7 +72,7 @@ namespace Agca.ECommerce.CoreMvcWebUI
             services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
                 .AddEntityFrameworkStores<CustomIdentityDbContext>()
                 .AddDefaultTokenProviders();
-
+    
 
         }
 

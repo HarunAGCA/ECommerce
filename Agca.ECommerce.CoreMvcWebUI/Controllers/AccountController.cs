@@ -186,6 +186,11 @@ namespace Agca.ECommerce.CoreMvcWebUI.Controllers
             return Redirect("/Product/List");
         }
 
+        public IActionResult AccessDenied()
+        {
+            return RedirectToAction("Logout", "Account");
+        }
+
         #endregion
 
         #region HelperMethods

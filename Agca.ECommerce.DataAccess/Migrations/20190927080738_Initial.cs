@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Agca.ECommerce.DataAccess.Migrations
 {
-    public partial class inital : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,11 +27,7 @@ namespace Agca.ECommerce.DataAccess.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TurkishIdNo = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    EMail = table.Column<string>(nullable: true)
+                    RegisterDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2019, 9, 27, 11, 7, 38, 680, DateTimeKind.Local).AddTicks(2702))
                 },
                 constraints: table =>
                 {
@@ -81,6 +77,34 @@ namespace Agca.ECommerce.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Url = table.Column<string>(nullable: true),
+                    IsMain = table.Column<bool>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    ProductId1 = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Photos_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Photos_Products_ProductId1",
+                        column: x => x.ProductId1,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderItems",
                 columns: table => new
                 {
@@ -118,7 +142,7 @@ namespace Agca.ECommerce.DataAccess.Migrations
                     CreditCardCVC = table.Column<string>(nullable: true),
                     CreditCardExpiryDate = table.Column<string>(nullable: true),
                     AmountOfPayment = table.Column<decimal>(nullable: false),
-                    DateOfPayment = table.Column<DateTime>(nullable: false),
+                    DateOfPayment = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2019, 9, 27, 11, 7, 38, 681, DateTimeKind.Local).AddTicks(8709)),
                     OrderId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -167,8 +191,7 @@ namespace Agca.ECommerce.DataAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_ProductId",
                 table: "OrderItems",
-                column: "ProductId",
-                unique: true);
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
@@ -180,6 +203,16 @@ namespace Agca.ECommerce.DataAccess.Migrations
                 table: "Payments",
                 column: "OrderId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ProductId",
+                table: "Photos",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ProductId1",
+                table: "Photos",
+                column: "ProductId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
@@ -200,6 +233,9 @@ namespace Agca.ECommerce.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "Photos");
 
             migrationBuilder.DropTable(
                 name: "Shipments");
